@@ -109,7 +109,6 @@ driver.implicitly_wait(10)
 driver.find_element_by_id('username').send_keys('13916686542')
 driver.find_element_by_id('password').send_keys('lemon123')
 driver.find_element_by_id('btnSubmit').click()
-time.sleep(5)
 #验证登录的用户是否跟输入的用户一致,
 # 第一次报错，说找不到对应的p标签，
 # 可能是页面还没有缓存出来，
@@ -121,7 +120,6 @@ else :
     print ('用户名不一致，这条测试用例不通过')
 # 点击零售出库
 driver.find_element_by_xpath("//span[text()='零售出库']").click()
-time.sleep(10)
 # 输入数据并搜索对应的结果,没有找到该元素，因为该元素是嵌套的子页面
 # 要先切换到嵌套的子页面
 # 通过id切换，发现找不到 ---动态id 找不到报错
@@ -131,14 +129,16 @@ time.sleep(10)
 # '//iframe[@src=src="/pages/materials/retail_out_list.html"]').get_attribute('id')
 # driver.switch_to.frame(ifr_id)
 driver.switch_to.frame(driver.find_element_by_xpath('//iframe[@src="/pages/materials/retail_out_list.html"]'))
-driver.find_element_by_id('searchNumber').send_keys('806')
+driver.find_element_by_id('searchNumber').send_keys('533')
 # driver.find_element_by_xpath("//input[@id='searchNumber']").send_keys('886')
 driver.find_element_by_id('searchBtn').click()
+time.sleep(10)
 # 获取并判断查询到的内容
-num = driver.find_element_by_xpath('//tr[@id="datagrid-row-rl-2-0"]/td[@field="number"]/div').text
-if '806' in num:
+num = driver.find_element_by_xpath('//tr[@id="datagrid-row-r1-2-0"]/td[@field="number"]/div').text
+print(num)
+if '533' in num:
     print("这条测试用例通过")
-else :
+else:
     print("查询结果错误！这条测试用例不通过")
 
 time.sleep(2)
